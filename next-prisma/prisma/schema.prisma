@@ -20,11 +20,20 @@ model User {
   createdAt DateTime @default(now())
 }
 
+enum TodoType {
+  WORK
+  HOME
+  FUN
+  HEALTH
+}
+
 model Todo {
   id        Int      @id @default(autoincrement())
   title     String
   completed Boolean  @default(false)
   createdAt DateTime @default(now())
+  dueDate   DateTime?
+  type      TodoType  @default(HOME)
   userId    String?
   user      User?    @relation(fields: [userId], references: [id])
 }

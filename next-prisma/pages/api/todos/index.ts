@@ -21,12 +21,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   else if (req.method === 'POST') {
     try {
       const decodedToken = await verifyToken(req);
-      const { title } = req.body;
+      const { title, type, dueDate } = req.body;
       const newTodo = await prisma.todo.create({
-        data: { title, userId: decodedToken.uid, },
+        data: { title, type, dueDate: dueDate ? new Date(dueDate) : null, userId: decodedToken.uid, },
       });
       res.status(201).json(newTodo);
     } catch (error) {
+      console.error('Error creating todo:', error);
       res.status(500).json({ error: 'Failed to create todo' });
     }
   } 
