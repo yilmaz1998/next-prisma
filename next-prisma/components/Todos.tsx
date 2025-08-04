@@ -41,7 +41,7 @@ const Todos = ({ user, todos }: Props) => {
           </p>
             {todo.dueDate && (
                 <p className="text-sm text-gray-500">
-                Due Date: {new Date(todo.dueDate).toLocaleDateString()}
+                Due Date: {new Date(todo.dueDate).toLocaleString()}
                 </p>
             )}
           <div className="mt-2 space-x-2">
