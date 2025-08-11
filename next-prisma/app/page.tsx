@@ -154,7 +154,7 @@ export default function Home() {
       </div>
       <div className="w-full lg:w-1/2">
       <div className="bg-white p-4">
-        <Todos user={user} todos={todos} />
+        <Todos user={user} todos={todos} setTodos={setTodos} />
       </div>
     </div>
       </div>

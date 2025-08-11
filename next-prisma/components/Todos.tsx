@@ -11,10 +11,30 @@ type Todo = {
 type Props = {
   user: User;
   todos: Todo[];
+  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
 };
 
-const Todos = ({ user, todos }: Props) => {
+const Todos = ({ user, todos, setTodos }: Props) => {
 
+  const handleComplete = async (todo: Todo) => {
+    try {
+      const token = await user.getIdToken();
+      const response = await fetch(`/api/todos/${todo.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ completed: !todo.completed }),
+      });
+      if (response.ok) {
+        setTodos(prev =>
+          prev.map(t => (t.id === todo.id ? { ...t, completed: !t.completed } : t)))
+      }
+    } catch (error) {
+      console.error('Error completing todo:', error);
+    }
+  }
 
   if (todos.length === 0)
     return <p className="px-4 py-2 mt-2">No todos found.</p>;
@@ -45,17 +65,16 @@ const Todos = ({ user, todos }: Props) => {
                 </p>
             )}
           <div className="mt-2 space-x-2">
+          <button
+            onClick={() => handleComplete(todo)}
+            className={`btn ${
+            todo.completed ? 'btn-secondary' : 'btn-success'
+          }`}
+          >
+          {todo.completed ? 'Mark Incomplete' : 'Mark Complete'}
+          </button>
             <button
-              className={`px-3 py-1 rounded border ${
-                todo.completed
-                  ? 'text-gray-600 border-gray-400'
-                  : 'text-green-700 border-green-500'
-              }`}
-            >
-              {todo.completed ? 'Mark Incomplete' : 'Mark Complete'}
-            </button>
-            <button
-              className="px-3 py-1 rounded border border-red-500 text-red-600"
+              className="btn btn-danger"
             >
               Delete
             </button>
