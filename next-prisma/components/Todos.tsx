@@ -36,6 +36,25 @@ const Todos = ({ user, todos, setTodos }: Props) => {
     }
   }
 
+  const handleDelete = async (id: string) => {
+    if (!user) return;
+  
+    try {
+      const token = await user.getIdToken();
+      const res = await fetch(`/api/todos/${id}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (res.ok) {
+        setTodos(prev => prev.filter(t => t.id !== id));
+      }
+    } catch (error) {
+      console.error('Error deleting todo:', error);
+    }
+  };
+
   if (todos.length === 0)
     return <p className="px-4 py-2 mt-2">No todos found.</p>;
 
@@ -75,6 +94,7 @@ const Todos = ({ user, todos, setTodos }: Props) => {
           </button>
             <button
               className="btn btn-danger"
+              onClick={() => handleDelete(todo.id)}
             >
               Delete
             </button>
