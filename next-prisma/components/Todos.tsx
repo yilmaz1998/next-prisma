@@ -4,6 +4,7 @@ import { FaHeartCircleCheck } from "react-icons/fa6";
 import { FaLaughWink } from "react-icons/fa";
 import { IoBriefcaseSharp } from "react-icons/io5";
 import { IconType } from "react-icons";
+import { FaClipboardList } from "react-icons/fa";
 
 type Todo = {
   id: string;
@@ -75,6 +76,8 @@ const Todos = ({ user, todos, setTodos }: Props) => {
     }
   };
 
+  const incompleteTodos = todos.filter(todo => !todo.completed).length;
+
   if (todos.length === 0)
     return <p className="px-4 py-2 mt-2">No todos found.</p>;
 
@@ -84,19 +87,25 @@ const Todos = ({ user, todos, setTodos }: Props) => {
     <p className="text-gray-500">No todos found.</p>
   ) : (
     <div>
-        <h1 className='text-center mb-4 mt-4'>My Todos</h1>
+      <h1 className="text-center mb-4 mt-4 flex justify-center items-center space-x-2">
+      <span>My Todos</span>
+      <span className="flex items-center font-bold">
+      <FaClipboardList className="mr-1" />
+      ({incompleteTodos})
+      </span>
+      </h1>
       {todos.map((todo) => {
         const Icon = getIcon(todo.type);
         return (
           <div
           key={todo.id}
           className={`p-4 mt-2 border rounded-md ${
-            todo.completed ? 'bg-gray-100' : 'bg-red-50'
+            todo.completed ? 'bg-gray-100' : 'bg-red-100'
           }`}
         >
-          <p className="font-medium text-gray-800">
-           <Icon className="mb-2 text-xl" />
-            Task: <span className="text-blue-600">{todo.title}</span>
+          <p className="font-medium text-gray-800 break-words">
+           <Icon className="mb-2 text-2xl" />
+           <span className="text-red-500">Task:</span> {todo.title}
           </p>
           <p className="text-sm text-gray-500">
             Status: {todo.completed ? 'Completed' : 'Not completed'}
@@ -106,12 +115,12 @@ const Todos = ({ user, todos, setTodos }: Props) => {
                 Due Date: {new Date(todo.dueDate).toLocaleString()}
                 </p>
             )}
-          <div className="mt-2 space-x-2">
+          <div className="mt-2 d-flex">
           <button
             onClick={() => handleComplete(todo)}
             className={`btn ${
             todo.completed ? 'btn-secondary' : 'btn-success'
-          }`}
+          } me-1`}
           >
           {todo.completed ? 'Mark Incomplete' : 'Mark Complete'}
           </button>
