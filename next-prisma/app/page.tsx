@@ -114,7 +114,7 @@ export default function Home() {
       </header>
       <div className="flex flex-col lg:flex-row">
       <div className="w-full lg:w-1/2">
-      <h1 className="text-center mt-4">Add a To-Do</h1>
+      <h1 className="text-center mt-5">Add a To-Do</h1>
       <form onSubmit={handleSubmit} className="flex flex-col max-w-full mt-4">
         <div className="form-floating w-4/5 mx-auto">
           <textarea

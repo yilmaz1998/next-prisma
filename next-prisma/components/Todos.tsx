@@ -1,4 +1,9 @@
 import { User } from "firebase/auth";
+import { IoHome } from "react-icons/io5";
+import { FaHeartCircleCheck } from "react-icons/fa6";
+import { FaLaughWink } from "react-icons/fa";
+import { IoBriefcaseSharp } from "react-icons/io5";
+import { IconType } from "react-icons";
 
 type Todo = {
   id: string;
@@ -13,6 +18,21 @@ type Props = {
   todos: Todo[];
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
 };
+
+const getIcon = (type: string): IconType => {
+  switch (type) {
+    case 'HOME':
+      return IoHome;
+    case 'WORK':
+      return IoBriefcaseSharp;
+    case 'FUN':
+      return FaLaughWink;
+    case 'HEALTH':
+      return FaHeartCircleCheck;
+    default:
+      return IoHome;
+  }
+}
 
 const Todos = ({ user, todos, setTodos }: Props) => {
 
@@ -64,15 +84,18 @@ const Todos = ({ user, todos, setTodos }: Props) => {
     <p className="text-gray-500">No todos found.</p>
   ) : (
     <div>
-        <h1 className='text-center mb-4'>My Todos</h1>
-      {todos.map((todo) => (
-        <div
+        <h1 className='text-center mb-4 mt-4'>My Todos</h1>
+      {todos.map((todo) => {
+        const Icon = getIcon(todo.type);
+        return (
+          <div
           key={todo.id}
           className={`p-4 mt-2 border rounded-md ${
             todo.completed ? 'bg-gray-100' : 'bg-red-50'
           }`}
         >
           <p className="font-medium text-gray-800">
+           <Icon className="mb-2 text-xl" />
             Task: <span className="text-blue-600">{todo.title}</span>
           </p>
           <p className="text-sm text-gray-500">
@@ -100,7 +123,8 @@ const Todos = ({ user, todos, setTodos }: Props) => {
             </button>
           </div>
         </div>
-      ))}
+        )
+        })}
     </div>
   )}
 </div>
