@@ -6,6 +6,7 @@ import { onAuthStateChanged, signOut, User } from "firebase/auth";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@/app/globals.css";
 import Todos from "@/components/Todos";
+import { SlActionRedo } from "react-icons/sl";
 
 export default function Home() {
   const router = useRouter();
@@ -103,8 +104,9 @@ export default function Home() {
 
   return (
     <div>
-      <header className="flex bg-blue-200 justify-between py-2 px-4">
-        <p className="text-2xl">Welcome, {user.email}</p>
+      <header className="flex bg-blue-100 text-black justify-between py-2 px-4">
+        <p className="hidden lg:block text-l sm:text-2xl">To-Do App</p>
+        <p className="text-l sm:text-2xl">Welcome, {user.email}</p>
         <button
           onClick={handleLogout}
           className="btn btn-danger"
@@ -153,7 +155,7 @@ export default function Home() {
       </form>
       </div>
       <div className="w-full lg:w-1/2">
-      <div className="bg-white p-4">
+      <div className="p-4">
         <Todos user={user} todos={todos} setTodos={setTodos} />
       </div>
     </div>

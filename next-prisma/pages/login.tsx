@@ -5,6 +5,7 @@ import { auth } from "@/lib/firebaseClient";
 import "@/app/globals.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Link from "next/link";
+import { SlActionRedo } from "react-icons/sl";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -32,7 +33,12 @@ const Login = () => {
   };
 
   return (
-    <div className="h-screen flex flex-col justify-center text-center items-center">
+    <div className="bg-gradient-to-br from-sky-900 via-blue-800 to-indigo-900 h-screen flex flex-col justify-center text-center items-center">
+      <div className="flex">
+        <h1 className="text-white">Welcome to To-Do App</h1>
+        <SlActionRedo className="text-white text-3xl ml-2"/>
+      </div>
+      <p className="text-white mb-4">Keep calm and stay organized.</p>
       <div className="bg-white w-full max-w-md bg-white shadow-lg rounded-xl p-12">
       <h1 className="text-xl font-bold mb-4">Login</h1>
       <form onSubmit={handleLogin} className="flex flex-col max-w-full">

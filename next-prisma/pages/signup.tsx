@@ -30,7 +30,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="h-screen flex flex-col justify-center text-center items-center">
+    <div className="bg-gradient-to-br from-sky-900 via-blue-800 to-indigo-900 h-screen flex flex-col justify-center text-center items-center">
     <div className="bg-white w-full max-w-md bg-white shadow-lg rounded-xl p-12">
       <h1 className="text-xl font-bold mb-4">Sign Up</h1>
       <form onSubmit={handleSignup} className="flex flex-col max-w-full">
@@ -48,7 +48,7 @@ const Signup = () => {
         </button>
       </form>
       <div className='mt-6 text-center'>
-        <Link href="/login" className="text-blue-600">Login Page</Link>
+        <Link href="/login" className="text-blue-600">Back to Login Page</Link>
       </div> 
     </div>
     </div>
