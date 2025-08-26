@@ -91,7 +91,7 @@ const Todos = ({ user, todos, setTodos }: Props) => {
           <div
           key={todo.id}
           className={`p-4 mt-2 border rounded-md ${
-            todo.completed ? 'bg-gray-100' : 'bg-red-50'
+            todo.completed ? 'bg-blue-100' : 'bg-red-200'
           }`}
         >
           <p className="font-medium text-gray-800">
