@@ -3,6 +3,8 @@ import { useRouter } from "next/router";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/lib/firebaseClient";
 import Link from "next/link";
+import "@/app/globals.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const Signup = () => {
   const [email, setEmail] = useState("");

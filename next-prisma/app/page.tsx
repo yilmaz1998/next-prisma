@@ -6,7 +6,6 @@ import { onAuthStateChanged, signOut, User } from "firebase/auth";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@/app/globals.css";
 import Todos from "@/components/Todos";
-import { SlActionRedo } from "react-icons/sl";
 
 export default function Home() {
   const router = useRouter();
